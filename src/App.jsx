@@ -12,7 +12,14 @@ import Store from "./assets/components/Store/Store.jsx";
 function App() {
     const [stores, setStores] = useState([]);
     const [storeId, setStoreId] = useState(null);
-    const [cartItems, setCartItems] = useLocalStorageInit('cartItems', []);
+
+    const getCartItemsFromLocalStorage = () => {
+        const storedCartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+        return storedCartItems;
+    };
+
+    const cartItemsFromLocalStorage = getCartItemsFromLocalStorage();
+    const [cartItems, setCartItems] = useLocalStorageInit('cartItems', cartItemsFromLocalStorage);
 
     useEffect(() => {
         const sampleStores = [
@@ -23,9 +30,9 @@ function App() {
         setStores(sampleStores);
 
         const sampleProducts = [
-            { id: 1, name: 'Товар 1', img: product1 },
-            { id: 2, name: 'Товар 2', img: product2 },
-            { id: 3, name: 'Товар 3', img: product3 },
+            { id: 1, name: 'Товар 1', img: product1, price: 100 },
+            { id: 2, name: 'Товар 2', img: product2, price: 200 },
+            { id: 3, name: 'Товар 3', img: product3, price: 300 },
         ];
 
         sampleStores.forEach((store) => {
@@ -73,7 +80,7 @@ function App() {
                             />
                         }
                     />
-                    <Route path="/cart" element={<Cart cartItems={cartItems} />} />
+                    <Route path="/cart" element={<Cart cartItems={cartItems} setCartItems={setCartItems} />} />
                 </Routes>
             </div>
         </Router>
