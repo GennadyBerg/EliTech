@@ -1,0 +1,142 @@
+.cart {
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+
+.cart__container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+
+.cart__form {
+    border: 3px solid #d6d6d6;
+    border-radius: 20px;
+    box-shadow: 0 0 10px 0 #a0a0a0;
+    height: 100vh;
+    overflow: auto;
+    width: 50%;
+    padding: 20px 40px;
+}
+
+.cart__map {
+
+}
+
+.cart__inputs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.cart__input {
+    width: 100%;
+}
+
+.input-cart {
+    border: 1px solid #969696;
+    width: 100%;
+    height: 30px;
+    border-radius: 10px;
+    padding: 0 10px;
+}
+
+.cart__orderList {
+    width: 50%;
+}
+
+.orderList__root {
+}
+
+.orderList__item {
+    display: flex;
+    align-items: center;
+    border: 2px solid #d6d6d6;
+    margin: 10px;
+    padding: 10px 10px 20px 10px;
+    border-radius: 10px;
+}
+
+.orderList__container {
+    width: 100%;
+    box-shadow: 0 0 10px 0 #a0a0a0;
+    border-radius: 10px;
+    height: 80vh;
+    overflow: auto;
+}
+
+.orderList__image {
+    width: 50%;
+}
+
+.orderList__img {
+    width: 400px;
+    border-radius: 10px;
+}
+
+.orderList__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+}
+
+.orderList__title {
+}
+
+.orderList__price {
+}
+
+.orderList__count {
+}
+
+.orderList__input {
+    width: 150px;
+    height: 30px;
+    border: 1px solid #9c9c9c;
+    border-radius: 5px;
+    margin-top: 30px;
+    text-align: center;
+}
+
+.orderList__info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: end;
+    padding-top: 30px;
+}
+
+.orderList__captcha {
+    padding-bottom: 30px;
+}
+
+.captcha {
+    border: 1px solid #9c9c9c;
+    padding: 7px 30px;
+    background: transparent;
+    border-radius: 10px;
+}
+
+.orderList__submit {
+    display: flex;
+    align-items: center;
+    gap: 80px;
+}
+
+.orderList_sum {
+}
+
+.orderList__button {
+}
+
+.button__submit {
+    border: 1px solid #9c9c9c;
+    padding: 10px 50px;
+    background: transparent;
+    border-radius: 10px;
+}

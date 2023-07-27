@@ -1,0 +1,35 @@
+.storeList {
+    border: 3px solid #d6d6d6;
+    border-radius: 20px;
+    box-shadow: 0 0 10px 0 #a0a0a0;
+    height: 100vh;
+    overflow: auto;
+}
+.storeList__list {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.storeList__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 30px;
+}
+
+.list__btn {
+    font-size: 20px;
+    background: #5277aa;
+    padding: 20px 50px;
+    border-radius: 15px;
+    color: white;
+}
+
+.storeList__title {
+    font-size: 30px;
+    text-align: center;
+    font-weight: bold;
+    padding-bottom: 40px;
+}
