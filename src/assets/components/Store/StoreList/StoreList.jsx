@@ -8,14 +8,14 @@ const StoreList = ({stores, setStoreId}) => {
                 <ul className="storeList__list">
                     {stores.map((store) => (
                         <li className='list__item' key={store.id}>
-                    <button className="list__btn" onClick={() => setStoreId(store.id)}>{store.name}</button>
-                </li>
-                ))}
-            </ul>
+                            <button className="list__btn" onClick={() => setStoreId(store.id)}>{store.name}</button>
+                        </li>
+                    ))}
+                </ul>
+            </div>
         </div>
-</div>
-)
-    ;
+    )
+        ;
 };
 
 export default StoreList;
