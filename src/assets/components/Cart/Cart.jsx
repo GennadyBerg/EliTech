@@ -4,6 +4,81 @@ import Map from "../Map/Map.jsx";
 
 const Cart = ({cartItems, setCartItems}) => {
     const [quantities, setQuantities] = useState({});
+    const [firstName, setFirstName] = useState('');
+    const [address, setAddress] = useState('');
+    const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
+    const [formErrors, setFormErrors] = useState({});
+
+    const [isMessageInputFocused, setMessageInputFocused] = useState(false);
+
+    const handleFocusMessageInput = () => {
+        setMessageInputFocused(true);
+    };
+
+    const handleBlurMessageInput = () => {
+        setMessageInputFocused(false);
+    };
+    const isValidEmail = (email) => {
+        const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/;
+        return emailRegex.test(email);
+    };
+
+    const isValidPhoneNumber = (phone) => {
+        const phoneRegex = /^\+380\d{9}$/;
+        return phoneRegex.test(phone);
+    };
+
+    const handleFormSubmit = (event) => {
+        event.preventDefault();
+
+        const errors = {};
+
+        if (firstName.trim() === '') {
+            errors.firstName = 'Будь ласка, напишіть ваше ім`я.';
+        }
+
+        if (address.trim() === '') {
+            errors.address = 'Будь ласка, напишіть ваше адрес.';
+        }
+
+        if (!isValidEmail(email)) {
+            errors.email = 'Будь ласка напишіть ваш Email.';
+        }
+
+        if (!isValidPhoneNumber(phone)) {
+            errors.phone = 'Будь ласка напишіть ваш номер телефону';
+        }
+
+        setFormErrors(errors);
+
+        if (Object.keys(errors).length === 0) {
+            setFormErrors({});
+            // Form submission logic here
+            alert('Form submitted successfully!');
+        }
+    };
+
+    const handlePhoneFocus = () => {
+        if (!phone) {
+            setPhone('+380');
+        }
+    };
+
+
+    const handlePhoneInput = (event) => {
+        let phoneNumber = event.target.value.replace(/[^\d]/g, '');
+
+        if (phoneNumber.startsWith('380')) {
+            phoneNumber = '+380' + phoneNumber.slice(3);
+        } else if (!phoneNumber.startsWith('+380')) {
+            phoneNumber = '+380' + phoneNumber;
+        }
+
+        phoneNumber = phoneNumber.slice(0, 13);
+
+        setPhone(phoneNumber);
+    };
 
     const handleQuantityChange = (productId, event) => {
         const value = event.target.value;
@@ -38,26 +113,45 @@ const Cart = ({cartItems, setCartItems}) => {
     };
 
     return (
-        <div className="cart">
+        <form className="cart" onSubmit={handleFormSubmit}>
             <div className="cart__container">
                 <div className="cart__form">
                     <div className="cart__map">
                         <Map/>
                     </div>
-                    <form className="cart__inputs">
+                    <div className="cart__inputs">
                         <div className="cart__input">
-                            <input className='input-cart' type="text"/>
+                            <label htmlFor="input1">Address:</label>
+                            <input type="text" id="last-name" className="input-cart" value={address}
+                                   onChange={(e) => setAddress(e.target.value)}/>
+                            {formErrors.address && <p className="error">{formErrors.address}</p>}
                         </div>
                         <div className="cart__input">
-                            <input className='input-cart' type="text"/>
+                            <label htmlFor="input2">Email:</label>
+                            <input type="email" id="email" className="input-cart" value={email}
+                                   onChange={(e) => setEmail(e.target.value)}/>
+                            {formErrors.email && <p className="error">{formErrors.email}</p>}
                         </div>
                         <div className="cart__input">
-                            <input className='input-cart' type="text"/>
+                            <label htmlFor="input3">Phone:</label>
+                            <input
+                                type="tel"
+                                id="phone"
+                                className="input-cart"
+                                value={phone}
+                                onFocus={handlePhoneFocus}
+                                onChange={handlePhoneInput}
+                                placeholder="+380"
+                            />
+                            {formErrors.phone && <p className="error">{formErrors.phone}</p>}
                         </div>
                         <div className="cart__input">
-                            <input className='input-cart' type="text"/>
+                            <label htmlFor="input4">Name:</label>
+                            <input type="text" id="first-name" className="input-cart" value={firstName}
+                                   onChange={(e) => setFirstName(e.target.value)}/>
+                            {formErrors.firstName && <p className="error">{formErrors.firstName}</p>}
                         </div>
-                    </form>
+                    </div>
                 </div>
                 <div className="orderList__main">
                     <div className="cart__orderList">
@@ -96,7 +190,9 @@ const Cart = ({cartItems, setCartItems}) => {
                                 <div className="orderList__submit">
                                     <div className="orderList_sum">Total sum: {calculateTotalSum()} uah.</div>
                                     <div className="orderList__button">
-                                        <button className="button__submit">Submit</button>
+                                        <button type="submit" className="button__submit">
+                                            send message
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -104,7 +200,7 @@ const Cart = ({cartItems, setCartItems}) => {
                     </div>
                 </div>
             </div>
-        </div>
+        </form>
     );
 };
 

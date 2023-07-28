@@ -20,7 +20,7 @@ const Map = () => {
     };
 
     return (
-        <div style={{ height: '500px', width: '100%' }}>
+        <div style={{ height: '500px', width: '100%'}}>
             <GoogleMapReact
                 bootstrapURLKeys={{ key: API_KEY }}
                 defaultCenter={defaultMapCenter}

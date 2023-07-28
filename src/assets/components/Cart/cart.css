@@ -21,7 +21,7 @@
 }
 
 .cart__map {
-
+    margin-bottom: 40px;
 }
 
 .cart__inputs {
@@ -36,12 +36,19 @@
     width: 100%;
 }
 
+.cart__input label {
+    color: #5e5e5e;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
 .input-cart {
     border: 1px solid #969696;
     width: 100%;
     height: 30px;
     border-radius: 10px;
     padding: 0 10px;
+    margin-top: 10px;
 }
 
 .orderList__main {
@@ -142,4 +149,10 @@
     padding: 10px 50px;
     background: transparent;
     border-radius: 10px;
+}
+
+.error {
+    color: red;
+    font-size: 12px;
+    margin-top: 4px;
 }
