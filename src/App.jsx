@@ -9,7 +9,14 @@ import { DbContext } from './assets/Contexts.js';
 
 function App() {
     const [storeId, setStoreId] = useState(null);
-    const [cartItems, setCartItems] = useLocalStorageInit('cartItems', []);
+
+    const getCartItemsFromLocalStorage = () => {
+        const storedCartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+        return storedCartItems;
+    };
+
+    const cartItemsFromLocalStorage = getCartItemsFromLocalStorage();
+    const [cartItems, setCartItems] = useLocalStorageInit('cartItems', cartItemsFromLocalStorage);
 
     const db = useContext(DbContext);
     useEffect(() => {
@@ -57,7 +64,7 @@ function App() {
                             />
                         }
                     />
-                    <Route path="/cart" element={<Cart cartItems={cartItems} />} />
+                    <Route path="/cart" element={<Cart cartItems={cartItems} setCartItems={setCartItems} />} />
                 </Routes>
             </div>
         </Router>
