@@ -105,7 +105,7 @@ class IndexedbEngine {
         request = objectStore.getAll();
 
       request.onsuccess = (event) => {
-        const data = event.target.result;
+        let data = event.target.result;
         if (filterBy && !filterBy.indexName)
           data = data.filter(d => d[filterBy.propertyName] == filterBy.value);
         resolve(data);
