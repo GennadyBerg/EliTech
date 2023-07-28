@@ -23,11 +23,8 @@ function App() {
     const db = useContext(DbContext);
     useEffect(() => {
         const loadData = async () => {
-            if (!isDatabaseInitialized){
-                setDatabaseInitialized(true);
-                await db.fillData();
-                setDatabaseInitializing(false);
-            }
+            await db.fillData();
+            setDatabaseInitializing(false);
         }
         loadData();
     }, []);
@@ -54,9 +51,9 @@ function App() {
     };
 
     return (
-        isDatabaseInitializing ? 
-        <></>
-        :
+        isDatabaseInitializing ?
+            <></>
+            :
             <Router>
                 <div className="_container">
                     <Header />
