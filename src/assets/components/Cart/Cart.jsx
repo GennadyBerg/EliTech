@@ -191,7 +191,7 @@ const Cart = ({cartItems, setCartItems}) => {
                                     <div className="orderList_sum">Total sum: {calculateTotalSum()} uah.</div>
                                     <div className="orderList__button">
                                         <button type="submit" className="button__submit">
-                                            send message
+                                            Submit
                                         </button>
                                     </div>
                                 </div>
