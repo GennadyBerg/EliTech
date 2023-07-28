@@ -1,6 +1,6 @@
 ﻿import { DbContext } from "../Contexts";
 import React from 'react';
-import { IdxdbProvider } from "./IdxdbProvider";
+import { IndexedbEngine } from "./IndexedbEngine";
 import product1img from '../img/chocolate-1640x790-4-1536x740.jpg';
 import product2img from '../img/fruit-riot-945x560-yellow.jpg';
 import product3img from '../img/roshen-cake-945x560-5.jpg';
@@ -8,7 +8,7 @@ import product3img from '../img/roshen-cake-945x560-5.jpg';
 class ShopDbProvider extends React.Component {
   constructor(props) {
     super(props);
-    this.db = new IdxdbProvider({ storeNames: ['stores', 'products'], dbName: 'shopDb' });
+    this.db = new IndexedbEngine({ storeNames: ['stores', 'products'], dbName: 'shopDb' });
   }
 
   async fillDatabaseWithData() {

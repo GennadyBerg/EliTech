@@ -2,12 +2,12 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
-import {DbProvider} from "./assets/db/DbProvider"
+import {ShopDbProvider} from "./assets/db/ShopDbProvider"
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <DbProvider>
+    <ShopDbProvider>
       <App />
-    </DbProvider>
+    </ShopDbProvider>
   </React.StrictMode>,
 )

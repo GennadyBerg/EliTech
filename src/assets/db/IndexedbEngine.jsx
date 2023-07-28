@@ -1,9 +1,8 @@
 ﻿import React from 'react';
 
-class IdxdbProvider extends React.Component {
-  constructor(props) {
-    super(props);
-    const { storeNames = ['records'], dbName = 'my-db' } = this.props ?? {};
+class IndexedbEngine {
+  constructor(settings) {
+    const { storeNames = ['records'], dbName = 'my-db' } = settings ?? {};
     this.dbName = dbName;
     this.storeNames = storeNames;
     this.db = null;
@@ -142,4 +141,4 @@ class IdxdbProvider extends React.Component {
 }
 
 
-export { IdxdbProvider };
+export { IndexedbEngine };
