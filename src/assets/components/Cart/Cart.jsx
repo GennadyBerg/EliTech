@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import './cart.css';
+import Map from "../Map/Map.jsx";
 
 const Cart = ({cartItems, setCartItems}) => {
     const [quantities, setQuantities] = useState({});
@@ -41,6 +42,7 @@ const Cart = ({cartItems, setCartItems}) => {
             <div className="cart__container">
                 <div className="cart__form">
                     <div className="cart__map">
+                        <Map/>
                     </div>
                     <form className="cart__inputs">
                         <div className="cart__input">
