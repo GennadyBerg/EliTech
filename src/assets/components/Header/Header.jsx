@@ -9,10 +9,10 @@ const Header = () => {
                 <div className="header__navbar">
                     <ul className="navbar__list">
                         <li className='navbar__item _border'>
-                            <NavLink to='/'>Store</NavLink>
+                            <NavLink to='/'>Shop</NavLink>
                         </li>
                         <li className='navbar__item'>
-                            <NavLink to='/cart'>Cart</NavLink>
+                            <NavLink to='/cart'>Shopping Cart</NavLink>
                         </li>
                     </ul>
                 </div>

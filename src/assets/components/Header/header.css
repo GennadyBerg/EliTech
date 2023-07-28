@@ -2,13 +2,18 @@
 .navbar__list {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 30px;
+    margin: 30px;
+
 }
 
 
 
 .navbar__item a{
-    color: black;
+    color: rgb(21, 108, 239);
+    padding-left: 10px;
+    padding-right: 20px;
+    
 }
 
 ._border {

@@ -44,8 +44,11 @@
     padding: 0 10px;
 }
 
+.orderList__main {
+    width: 100%;
+}
+
 .cart__orderList {
-    width: 50%;
 }
 
 .orderList__root {
