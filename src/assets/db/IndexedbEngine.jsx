@@ -2,9 +2,9 @@
 
 class IndexedbEngine {
   constructor(settings) {
-    const { storeNames = ['records'], dbName = 'my-db' } = settings ?? {};
+    const { storeDefs = [{ name: 'records', indexes: [{}] }], dbName = 'my-db' } = settings ?? {};
     this.dbName = dbName;
-    this.storeNames = storeNames;
+    this.storeDefs = storeDefs;
     this.db = null;
   }
 
@@ -14,13 +14,19 @@ class IndexedbEngine {
   }
   async openDB() {
     return new Promise((resolve, reject) => {
-      const request = window.indexedDB.open(this.dbName, 1);
+      const request = window.indexedDB.open(this.dbName, 17);
 
       request.onupgradeneeded = (event) => {
         const db = event.target.result;
-        for (const storeName of this.storeNames) {
-          if (!db.objectStoreNames.contains(storeName)) {
-            db.createObjectStore(storeName, { keyPath: 'id', autoIncrement: true });
+        for (let storeDef of this.storeDefs) {
+          if (db.objectStoreNames.contains(storeDef.name))
+            db.deleteObjectStore(storeDef.name);
+          const store = db.createObjectStore(storeDef.name, { keyPath: 'id', autoIncrement: true });
+          if (storeDef.indexes) {
+            for (const indexDef of storeDef.indexes) {
+              const indexParameters = storeDef.indexParameters ?? { unique: false, multiEntry: false };
+              store.createIndex(indexDef.indexName, indexDef.propertyName, indexParameters);
+            }
           }
         }
       };
@@ -70,7 +76,7 @@ class IndexedbEngine {
       const request = objectStore.get(id);
 
       request.onsuccess = (event) => {
-        const data = event.target.result;
+        let data = event.target.result;
         if (data) {
           resolve(data);
         } else {
@@ -84,16 +90,24 @@ class IndexedbEngine {
     });
   }
 
-  async getAll(storeName = null) {
+  async getAll(storeName = null, filterBy = null) {
     storeName = storeName ?? this.storeNames[0];
     await this.ensureDB();
     return new Promise((resolve, reject) => {
       const transaction = this.db.transaction([storeName], 'readonly');
       const objectStore = transaction.objectStore(storeName);
-      const request = objectStore.getAll();
+      let request = null;
+      if (filterBy?.indexName) {
+        const index = objectStore.index(filterBy.indexName);
+        request = index.getAll(filterBy.value);
+      }
+      else
+        request = objectStore.getAll();
 
       request.onsuccess = (event) => {
         const data = event.target.result;
+        if (filterBy && !filterBy.indexName)
+          data = data.filter(d => d[filterBy.propertyName] == filterBy.value);
         resolve(data);
       };
 
