@@ -9,6 +9,8 @@ import { DbContext } from './assets/Contexts.js';
 
 function App() {
     const [storeId, setStoreId] = useState(null);
+    const [isDatabaseInitializing, setDatabaseInitializing] = useState(true);
+    const [isDatabaseInitialized, setDatabaseInitialized] = useState(false);
 
     const getCartItemsFromLocalStorage = () => {
         const storedCartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
@@ -21,7 +23,11 @@ function App() {
     const db = useContext(DbContext);
     useEffect(() => {
         const loadData = async () => {
-            await db.fillData();
+            if (!isDatabaseInitialized){
+                setDatabaseInitialized(true);
+                await db.fillData();
+                setDatabaseInitializing(false);
+            }
         }
         loadData();
     }, []);
@@ -48,26 +54,29 @@ function App() {
     };
 
     return (
-        <Router>
-            <div className="_container">
-                <Header />
-                <Routes>
-                    <Route
-                        path="/"
-                        element={
-                            <Store
-                                storeId={storeId}
-                                setStoreId={setStoreId}
-                                cartItems={cartItems}
-                                setCartItems={setCartItems}
-                                addToCart={addToCart}
-                            />
-                        }
-                    />
-                    <Route path="/cart" element={<Cart cartItems={cartItems} setCartItems={setCartItems} />} />
-                </Routes>
-            </div>
-        </Router>
+        isDatabaseInitializing ? 
+        <></>
+        :
+            <Router>
+                <div className="_container">
+                    <Header />
+                    <Routes>
+                        <Route
+                            path="/"
+                            element={
+                                <Store
+                                    storeId={storeId}
+                                    setStoreId={setStoreId}
+                                    cartItems={cartItems}
+                                    setCartItems={setCartItems}
+                                    addToCart={addToCart}
+                                />
+                            }
+                        />
+                        <Route path="/cart" element={<Cart cartItems={cartItems} setCartItems={setCartItems} />} />
+                    </Routes>
+                </div>
+            </Router>
     );
 }
 

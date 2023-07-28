@@ -8,7 +8,11 @@ import product3img from '../img/roshen-cake-945x560-5.jpg';
 class ShopDbProvider extends React.Component {
   constructor(props) {
     super(props);
-    this.db = new IndexedbEngine({ storeNames: ['stores', 'products'], dbName: 'shopDb' });
+    this.db = new IndexedbEngine({ storeDefs: 
+        [
+          {name: 'stores'}, 
+          {name: 'products', indexes: [{indexName:"idxStoreIds", propertyName: "storeId"}]}
+        ], dbName: 'shopDb' });
   }
 
   async fillDatabaseWithData() {
@@ -67,9 +71,7 @@ class ShopDbProvider extends React.Component {
   }
 
   async getProducts(storeId) {
-    let res = await this.db.getAll('products');
-    if (storeId)
-      res = res.filter(p => p.storeId == storeId);
+    let res = await this.db.getAll('products', storeId ? {indexName: 'idxStoreIds', value: storeId} : undefined);
     return res;
   }
 
