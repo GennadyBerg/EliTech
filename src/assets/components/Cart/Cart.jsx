@@ -1,6 +1,7 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import './cart.css';
 import Map from "../Map/Map.jsx";
+import { DbContext } from '../../Contexts';
 
 const Cart = ({cartItems, setCartItems}) => {
     const [quantities, setQuantities] = useState({});
@@ -9,8 +10,8 @@ const Cart = ({cartItems, setCartItems}) => {
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [formErrors, setFormErrors] = useState({});
-
     const [isMessageInputFocused, setMessageInputFocused] = useState(false);
+    const db = useContext(DbContext);
 
     const handleFocusMessageInput = () => {
         setMessageInputFocused(true);
@@ -34,7 +35,7 @@ const Cart = ({cartItems, setCartItems}) => {
 
         const errors = {};
 
-        if (firstName.trim() === '') {
+        /*if (firstName.trim() === '') {
             errors.firstName = 'Будь ласка, напишіть ваше ім`я.';
         }
 
@@ -48,12 +49,23 @@ const Cart = ({cartItems, setCartItems}) => {
 
         if (!isValidPhoneNumber(phone)) {
             errors.phone = 'Будь ласка напишіть ваш номер телефону';
-        }
+        }*/
 
         setFormErrors(errors);
 
         if (Object.keys(errors).length === 0) {
             setFormErrors({});
+            const order =                 
+            {
+                creationDate: new Date(),
+                orderedProducts: cartItemsInCart.map(citm => ({productId: citm.productId, name: citm.name, price: citm.price, quantity: citm.quantity, storeId: citm.storeId})),
+                firstName,
+                address,
+                email,
+                phone,
+                formErrors,
+            }
+            db.addOrder(order);
             // Form submission logic here
             alert('Form submitted successfully!');
         }
@@ -117,7 +129,7 @@ const Cart = ({cartItems, setCartItems}) => {
             <div className="cart__container">
                 <div className="cart__form">
                     <div className="cart__map">
-                        <Map/>
+                        <Map setAddress={setAddress}/>
                     </div>
                     <div className="cart__inputs">
                         <div className="cart__input">

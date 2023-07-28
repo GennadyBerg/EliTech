@@ -8,11 +8,16 @@ import product3img from '../img/roshen-cake-945x560-5.jpg';
 class ShopDbProvider extends React.Component {
   constructor(props) {
     super(props);
-    this.db = new IndexedbEngine({ storeDefs: 
+    this.db = new IndexedbEngine(
+      { storeDefs: 
         [
           {name: 'stores'}, 
-          {name: 'products', indexes: [{indexName:"idxStoreIds", propertyName: "storeId"}]}
-        ], dbName: 'shopDb' });
+          {name: 'products', indexes: [{indexName:"idxStoreIds", propertyName: "storeId"}]},
+          {name: 'orders'},
+        ], 
+        dbName: 'shopDb',
+        version : 18
+      });
   }
 
   async fillDatabaseWithData() {
@@ -70,22 +75,43 @@ class ShopDbProvider extends React.Component {
     this.db.deleteProduct(productId, 'products');
   }
 
+  async addOrder(order) {
+    this.db.add(order, 'orders');
+  }
+
+  async updateOrder(order) {
+    this.db.update(order, 'orders');
+  }
+
+  async deleteOrder(id) {
+    this.db.deleteProduct(productId, 'orders');
+  }
+
   async getProducts(storeId) {
     let res = await this.db.getAll('products', storeId ? {indexName: 'idxStoreIds', value: storeId} : undefined);
     return res;
   }
+  
+  async getProductById(id) {
+    let res = await this.db.getById(id, 'products');
+    return res;
+  }
 
-  async getStores(storeId) {
+  async getOrders() {
+    let res = await this.db.getAll('orders');
+    return res;
+  }
+  
+  async getOrderById(id) {
+    let res = await this.db.getById(id, 'orders');
+    return res;
+  }
+
+  async getStores() {
     let res = await this.db.getAll('stores');
-    if (storeId)
-      res = res.filter(p => p.sttoreId == storeId);
     return res;
   }
 
-  async getById(id) {
-    let res = getProducts().find(p => p.id == id)
-    return res;
-  }
 
   render() {
     return (
@@ -93,8 +119,9 @@ class ShopDbProvider extends React.Component {
         value={{
           getProducts: this.getProducts.bind(this),
           getStores: this.getStores.bind(this),
-          getById: this.getById.bind(this),
           fillData: this.fillDatabaseWithData.bind(this),
+          getOrders: this.getOrders.bind(this),
+          addOrder: this.addOrder.bind(this),
         }}
       >
         {this.props.children}

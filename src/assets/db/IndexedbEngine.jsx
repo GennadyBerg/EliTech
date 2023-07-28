@@ -2,10 +2,11 @@
 
 class IndexedbEngine {
   constructor(settings) {
-    const { storeDefs = [{ name: 'records', indexes: [{}] }], dbName = 'my-db' } = settings ?? {};
+    const { storeDefs = [{ name: 'records', indexes: [{}] }], dbName = 'my-db', version = null } = settings ?? {};
     this.dbName = dbName;
     this.storeDefs = storeDefs;
     this.db = null;
+    this.version = version;
   }
 
   async ensureDB() {
@@ -14,7 +15,7 @@ class IndexedbEngine {
   }
   async openDB() {
     return new Promise((resolve, reject) => {
-      const request = window.indexedDB.open(this.dbName, 17);
+      const request = window.indexedDB.open(this.dbName, this.version);
 
       request.onupgradeneeded = (event) => {
         const db = event.target.result;
