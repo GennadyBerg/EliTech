@@ -1,12 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import './products.css';
+import { DbContext } from '../../../Contexts';
 
 const Products = ({ storeId, addToCart }) => {
     const [products, setProducts] = useState([]);
+    var db = useContext(DbContext);
 
     useEffect(() => {
-        const storedProducts = JSON.parse(localStorage.getItem(`products_${storeId}`)) || [];
-        setProducts(storedProducts);
+        const loadProducts = async () => {
+            var products = await db.getProducts(storeId);  
+            setProducts(products);
+        }
+        loadProducts();
     }, [storeId]);
 
     const handleAddToCart = (productId) => {
