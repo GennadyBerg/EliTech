@@ -10,7 +10,6 @@ import { DbContext } from './assets/Contexts.js';
 function App() {
     const [storeId, setStoreId] = useState(null);
     const [isDatabaseInitializing, setDatabaseInitializing] = useState(true);
-    const [isDatabaseInitialized, setDatabaseInitialized] = useState(false);
 
     const getCartItemsFromLocalStorage = () => {
         const storedCartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
@@ -23,8 +22,12 @@ function App() {
     const db = useContext(DbContext);
     useEffect(() => {
         const loadData = async () => {
-            await db.fillData();
-            setDatabaseInitializing(false);
+            try {
+                await db.fillData();
+                setDatabaseInitializing(false);
+            } catch (error) {
+                console.error('Error initializing database:', error);
+            }
         }
         loadData();
     }, []);
@@ -52,7 +55,7 @@ function App() {
 
     return (
         isDatabaseInitializing ?
-            <></>
+            <div>Loading...</div>
             :
             <Router>
                 <div className="_container">
