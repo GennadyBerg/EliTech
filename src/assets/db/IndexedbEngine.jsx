@@ -76,7 +76,7 @@ class IndexedbEngine {
       const request = objectStore.get(id);
 
       request.onsuccess = (event) => {
-        const data = event.target.result;
+        let data = event.target.result;
         if (data) {
           resolve(data);
         } else {
