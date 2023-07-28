@@ -21,7 +21,7 @@ function App() {
     const db = useContext(DbContext);
     useEffect(() => {
         const loadData = async () => {
-            db.fillData();
+            await db.fillData();
         }
         loadData();
     }, []);
