@@ -63,7 +63,7 @@
 }
 
 .orderList__item {
-    background-color: rgba(224, 223, 222, 0.74);
+    background-color: rgba(232, 230, 230, 0.33);
     display: flex;
     align-items: center;
     border: 2px solid #d6d6d6;
