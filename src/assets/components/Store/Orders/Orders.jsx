@@ -2,24 +2,24 @@ import React, { useState, useEffect, useContext } from 'react';
 import './products.css';
 import { DbContext } from '../../../Contexts';
 
-const Orders = ({ storeId, addToCart }) => {
+const Orders = ({ userId}) => {
     const [orders, setOrders] = useState([]);
     var db = useContext(DbContext);
 
     useEffect(() => {
         const loadOrders = async () => {
-            var orders = await db.getOrders(storeId);  
+            var orders = await db.getOrders(userId);  
             setOrders(orders);
         }
         loadOrders();
-    }, [storeId]);
+    }, [userId]);
 
     return (
         <div className='products'>
             <div className="products__container">
                 <h2>Список товаров в магазине {storeId}</h2>
                 <ul className='products__list'>
-                    {products.map((product) => (
+                    {orders.map((product) => (
                         <li className='products__item' key={product.id}>
                             <div className="products__content">
                                 <div className="products__image">
