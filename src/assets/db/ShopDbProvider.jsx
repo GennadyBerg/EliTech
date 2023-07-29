@@ -13,7 +13,7 @@ class ShopDbProvider extends React.Component {
         [
           {name: 'stores'}, 
           {name: 'products', indexes: [{indexName:"idxStoreIds", propertyName: "storeId"}]},
-          {name: 'orders'},
+          {name: 'orders', indexes: [{indexName:"idxUserId", propertyName: "orderId"}]},
         ], 
         dbName: 'shopDb',
         version : 18
@@ -72,7 +72,7 @@ class ShopDbProvider extends React.Component {
   }
 
   async deleteProduct(productId) {
-    this.db.deleteProduct(productId, 'products');
+    this.db.delete(productId, 'products');
   }
 
   async addOrder(order) {
@@ -84,7 +84,7 @@ class ShopDbProvider extends React.Component {
   }
 
   async deleteOrder(id) {
-    this.db.deleteProduct(productId, 'orders');
+    this.db.delete(id, 'orders');
   }
 
   async getProducts(storeId) {
@@ -97,8 +97,8 @@ class ShopDbProvider extends React.Component {
     return res;
   }
 
-  async getOrders() {
-    let res = await this.db.getAll('orders');
+  async getOrders(userId = null) {
+    let res = await this.db.getAll('orders', userId ? {indexName: 'idxUserId', value: userId} : undefined);
     return res;
   }
   

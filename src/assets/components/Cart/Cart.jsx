@@ -35,7 +35,7 @@ const Cart = ({cartItems, setCartItems}) => {
 
         const errors = {};
 
-        /*if (firstName.trim() === '') {
+        if (firstName.trim() === '') {
             errors.firstName = 'Будь ласка, напишіть ваше ім`я.';
         }
 
@@ -49,7 +49,7 @@ const Cart = ({cartItems, setCartItems}) => {
 
         if (!isValidPhoneNumber(phone)) {
             errors.phone = 'Будь ласка напишіть ваш номер телефону';
-        }*/
+        }
 
         setFormErrors(errors);
 
