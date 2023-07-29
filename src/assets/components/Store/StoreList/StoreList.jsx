@@ -19,7 +19,7 @@ const StoreList = ({ setStoreId, enabledStoreId }) => {
                 <ul className="storeList__list">
                     {
                         stores?.map((store) => {
-                            let enabledStore = !enabledStoreId || enabledStoreId === store.id;
+                            let enabledStore = !enabledStoreId || enabledStoreId == store.id;
                             return (<li className='list__item' key={store.id}>
                                 <button className={enabledStore ? "list__btn" : "list__btn_disabled"}  disabled={!enabledStore} onClick={enabledStore ? () => setStoreId(store.id) : undefined}>{store.name}</button>
                             </li>)

@@ -23,12 +23,12 @@ function single(arr, propName, orDefault = false) {
 }
 
 const Store = ({ stores, setStoreId, storeId, addToCart, cartItems }) => {
-    let selectedStore = single(cartItems, "storeId", true)
+    let selectedStoreItem = single(cartItems, "storeId", true)
     return (
         <div className="store">
             <MainLayout>
                 <div style={{ width: '20%' }}>
-                    <StoreList stores={stores} setStoreId={setStoreId} enabledStoreId={selectedStore?.id} />
+                    <StoreList stores={stores} setStoreId={setStoreId} enabledStoreId={selectedStoreItem?.storeId} />
                 </div>
                 <div style={{ width: '80%' }}>{storeId ? <Products storeId={storeId} addToCart={addToCart} /> : ''}</div>
             </MainLayout>

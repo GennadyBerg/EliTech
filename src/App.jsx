@@ -6,6 +6,7 @@ import Header from './assets/components/Header/Header.jsx';
 import useLocalStorageInit from './assets/components/Store/useLocalStorageInit';
 import Store from "./assets/components/Store/Store.jsx";
 import { DbContext } from './assets/Contexts.js';
+import OrdersList from './assets/components/Store/Orders/OrdersList.jsx';
 
 function App() {
     const [storeId, setStoreId] = useState(null);
@@ -74,7 +75,7 @@ function App() {
                             }
                         />
                         <Route path="/cart" element={<Cart cartItems={cartItems} setCartItems={setCartItems} />} />
-                 
+                        <Route path="/orders" element={<OrdersList />} />
                     </Routes>
                 </div>
             </Router>

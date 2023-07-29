@@ -63,7 +63,7 @@ const Cart = ({cartItems, setCartItems}) => {
                 address,
                 email,
                 phone,
-                formErrors,
+                totalSum: calculateTotalSum(),
             }
             db.addOrder(order);
             // Form submission logic here
