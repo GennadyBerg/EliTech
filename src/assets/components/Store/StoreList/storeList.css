@@ -20,6 +20,7 @@
 }
 
 .list__btn {
+    min-width: 200px;
     font-size: 20px;
     background: #5277aa;
     padding: 20px 50px;
@@ -28,6 +29,7 @@
 }
 
 .list__btn_disabled {
+    min-width: 200px;
     font-size: 20px;
     background: #4e5156;
     padding: 20px 50px;

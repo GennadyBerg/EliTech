@@ -22,9 +22,9 @@ class ShopDbProvider extends React.Component {
 
   async fillDatabaseWithData() {
     const stores = [
-      { id: 1, name: 'Магазин 1' },
-      { id: 2, name: 'Магазин 2' },
-      { id: 3, name: 'Магазин 3' },
+      { id: 1, name: 'McDonalds' },
+      { id: 2, name: 'KFC' },
+      { id: 3, name: 'Adidas' },
     ];
 
     await this.updateEnities(stores, 'stores');
@@ -122,6 +122,7 @@ class ShopDbProvider extends React.Component {
           fillData: this.fillDatabaseWithData.bind(this),
           getOrders: this.getOrders.bind(this),
           addOrder: this.addOrder.bind(this),
+          deleteOrder: this.deleteOrder.bind(this),
         }}
       >
         {this.props.children}

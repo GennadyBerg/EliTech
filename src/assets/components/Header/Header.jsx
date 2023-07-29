@@ -11,8 +11,11 @@ const Header = () => {
                         <li className='navbar__item _border'>
                             <NavLink to='/'>Shop</NavLink>
                         </li>
-                        <li className='navbar__item'>
+                        <li className='navbar__item _border'>
                             <NavLink to='/cart'>Shopping Cart</NavLink>
+                        </li>
+                        <li className='navbar__item '>
+                            <NavLink to='/orders'>History</NavLink>
                         </li>
                     </ul>
                 </div>

@@ -14,7 +14,7 @@
 
 .wrap-search-input {
     border: 1px solid #7f7e7e;
-    width: 90%;
+    width: 95%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -51,7 +51,9 @@
     overflow-y: auto;
     overflow-x: hidden;
     display: flex;
-    justify-content: center;
+    justify-content: start;
+    align-items: center;
+    flex-direction: column;
 
 }
 .order-wrapper {
@@ -99,6 +101,6 @@
 
 }
 .title-order {
-    text-align: center;
+    text-align: left;
     
 }
