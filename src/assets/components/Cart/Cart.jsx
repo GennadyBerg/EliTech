@@ -1,9 +1,9 @@
-import React, {useContext, useState} from 'react';
+import React, { useContext, useState } from 'react';
 import './cart.css';
 import Map from "../Map/Map.jsx";
 import { DbContext } from '../../Contexts';
 
-const Cart = ({cartItems, setCartItems}) => {
+const Cart = ({ cartItems, setCartItems }) => {
     const [quantities, setQuantities] = useState({});
     const [firstName, setFirstName] = useState('');
     const [address, setAddress] = useState('');
@@ -55,10 +55,10 @@ const Cart = ({cartItems, setCartItems}) => {
 
         if (Object.keys(errors).length === 0) {
             setFormErrors({});
-            const order =                 
+            const order =
             {
                 creationDate: new Date(),
-                orderedProducts: cartItemsInCart.map(citm => ({productId: citm.productId, name: citm.name, price: citm.price, quantity: citm.quantity, storeId: citm.storeId})),
+                orderedProducts: cartItemsInCart.map(citm => ({ productId: citm.productId, name: citm.name, price: citm.price, quantity: citm.quantity, storeId: citm.storeId, img: citm.img })),
                 firstName,
                 address,
                 email,
@@ -106,7 +106,7 @@ const Cart = ({cartItems, setCartItems}) => {
         setCartItems((prevCartItems) =>
             prevCartItems.map((item) =>
                 item.productId === productId
-                    ? {...item, quantity: parseInt(value)}
+                    ? { ...item, quantity: parseInt(value) }
                     : item
             ).filter((item) => item.quantity > 0)
         );
@@ -139,13 +139,13 @@ const Cart = ({cartItems, setCartItems}) => {
                         <div className="cart__input">
                             <label htmlFor="input1">Address:</label>
                             <input type="text" id="last-name" className="input-cart" value={address}
-                                   onChange={handleAddressInput}/>
+                                onChange={handleAddressInput} />
                             {formErrors.address && <p className="error">{formErrors.address}</p>}
                         </div>
                         <div className="cart__input">
                             <label htmlFor="input2">Email:</label>
                             <input type="email" id="email" className="input-cart" value={email}
-                                   onChange={(e) => setEmail(e.target.value)}/>
+                                onChange={(e) => setEmail(e.target.value)} />
                             {formErrors.email && <p className="error">{formErrors.email}</p>}
                         </div>
                         <div className="cart__input">
@@ -164,7 +164,7 @@ const Cart = ({cartItems, setCartItems}) => {
                         <div className="cart__input">
                             <label htmlFor="input4">Name:</label>
                             <input type="text" id="first-name" className="input-cart" value={firstName}
-                                   onChange={(e) => setFirstName(e.target.value)}/>
+                                onChange={(e) => setFirstName(e.target.value)} />
                             {formErrors.firstName && <p className="error">{formErrors.firstName}</p>}
                         </div>
                     </div>
@@ -176,7 +176,7 @@ const Cart = ({cartItems, setCartItems}) => {
                                 {cartItemsInCart.map((item) => (
                                     <div key={`${item.storeId}-${item.productId}`} className="orderList__item">
                                         <div className="orderList__image">
-                                            <img src={item.img} alt="" className="orderList__img"/>
+                                            <img src={item.img} alt="" className="orderList__img" />
                                         </div>
                                         <div className="orderList__content">
                                             <div className="orderList__title">{item.name}</div>
