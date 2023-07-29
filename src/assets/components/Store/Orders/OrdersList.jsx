@@ -7,6 +7,8 @@ const OrdersList = ({ userId }) => {
     var db = useContext(DbContext);
     const handleOrderDelete = async (orderId) => {
         await db.deleteOrder(orderId);
+        var newOrders = orders.filter(item => item.id !== orderId);
+        setOrders(newOrders);
     }
 
     useEffect(() => {
