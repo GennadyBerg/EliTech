@@ -6,8 +6,6 @@ const OrdersList = ({ userId }) => {
     const [orders, setOrders] = useState([]);
     const [email, setEmail] = useState();
     const [phone, setPhone] = useState();
-    const [currEmail, serCurrEmail] = useState();
-    const [currPhone, setCurrPhone] = useState();
 
     var db = useContext(DbContext);
 
@@ -24,31 +22,24 @@ const OrdersList = ({ userId }) => {
         setOrders(prevOrders => prevOrders.filter(item => item.id !== orderId));
     }
 
-    const handleFormSubmit = (event) => {
-        event.preventDefault();
-        setEmail(currEmail);
-        setPhone(currPhone);
-    }
-
     const handleEmailInput = (event) => {
         event.preventDefault();
-        serCurrEmail(event.target.value)
+        setEmail(event.target.value);
     };
     const handlePhoneInput = (event) => {
         event.preventDefault();
-        setCurrPhone(event.target.value)
+        setPhone(event.target.value);
     };
 
     return (
         <>
             <div className="orderList-container">
                 <div className="wrap-search-input">
-                    <form action="" onSubmit={handleFormSubmit}>
+                    <form action="">
                         <label htmlFor="input1">Email:</label>
-                        <input type="email" id="email-search" onChange={handleEmailInput} aria-label="mail" />
+                        <input id="email-search" onChange={handleEmailInput} aria-label="mail" />
                         <label htmlFor="input2">Phone:</label>
                         <input type="tel" id="phone-search" onChange={handlePhoneInput} />
-                        <button type="submit">Submit</button>
                     </form>
                 </div>
                 <div className="wrap-orders">

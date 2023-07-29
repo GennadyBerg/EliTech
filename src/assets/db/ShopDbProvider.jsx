@@ -123,12 +123,16 @@ class ShopDbProvider extends React.Component {
       filterValues = { userId, email };
     }
 
-    let res = await this.db.getAll('orders', index);
+    let res = undefined;
+    if (index && index.indexName != "idxUserId") 
+      res = await this.db.searchByStartOfString(index.value, 'orders', index.indexName);
+    else
+      res = await this.db.getAll('orders');
     if (filterValues && res.length > 0) {
       let filterEntries = Object.entries(filterValues);
       filterEntries = filterEntries.filter(e => e[1]);
       if (filterEntries.length > 0)
-        res = res.filter(r => filterEntries.every(fe => r[fe[0]] == fe[1]));
+        res = res.filter(r => filterEntries.every(fe => r[fe[0]].startsWith(fe[1])));
     }
     return res;
   }

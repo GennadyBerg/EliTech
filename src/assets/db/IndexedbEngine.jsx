@@ -153,6 +153,28 @@ class IndexedbEngine {
       };
     });
   }
+
+  async searchByStartOfString (str, storeName, indexName) {
+  
+    return new Promise((resolve, reject) => {
+      const transaction = this.db.transaction(storeName, 'readonly');
+      const objectStore = transaction.objectStore(storeName);
+      const index = objectStore.index(indexName);
+  
+      const range = IDBKeyRange.bound(str, str + '\uffff', false, true);
+  
+      const request = index.getAll(range);
+  
+      request.onsuccess = () => {
+        const result = request.result;
+        resolve(result);
+      };
+  
+      request.onerror = () => {
+        reject(request.error);
+      };
+    });
+  };
 }
 
 
