@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="orderList.css">
+</head>
+
+<body>
+    <header>
+        <div className='header'>
+            <div className="header__container">
+                <div className="header__navbar">
+                    <ul className="navbar__list">
+                        <li className='navbar__item _border'>
+                            <NavLink to='/'>Shop</NavLink>
+                        </li>
+                        <li className='navbar__item'>
+                            <NavLink to='/cart'>Shopping Cart</NavLink>
+                        </li>
+                        <li className='navbar__item'>
+                            <NavLink to='/cart'>History</NavLink>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="orderList-container">
+        <div class="wrap-search-input">
+            <form action="">
+                <label htmlFor="input1">Email:</label>
+                <input type="email" id="email-search" aria-label="mail">
+                <label htmlFor="input2">Phone:</label>
+                <input type="tel" id="phone-search">
+            </form>
+        </div>
+        <div class="wrap-orders">
+            <div class="order-wrapper">
+                <!-- <h4>order tittle / date </h4> -->
+                <div class="wrap-orderItems">
+                    <div class="card">
+                        <img class="poduct-img" src="/src/assets/img/smk-calendar-470x560-10.jpg" alt="product"
+                            width=60% height=100%>
+                        <div class="prod-price">
+                            <h5>product name</h5>
+                            <h5>price</h5>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <img class="poduct-img" src="/src/assets/img/smk-calendar-470x560-10.jpg" alt="product"
+                            width=60% height=100%>
+                        <div class="prod-price">
+                            <h5>product name</h5>
+                            <h5>price</h5>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <img class="poduct-img" src="/src/assets/img/smk-calendar-470x560-10.jpg" alt="product"
+                            width=60% height=100%>
+                        <div class="prod-price">
+                            <h5>product name</h5>
+                            <h5>price</h5>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="title-order">
+                    <h3>order#</h3>
+                    <h4>Total summ</h4>
+                    <h4>1000$</h4>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>

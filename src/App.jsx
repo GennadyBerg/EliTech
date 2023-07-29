@@ -74,6 +74,7 @@ function App() {
                             }
                         />
                         <Route path="/cart" element={<Cart cartItems={cartItems} setCartItems={setCartItems} />} />
+                 
                     </Routes>
                 </div>
             </Router>
@@ -81,3 +82,6 @@ function App() {
 }
 
 export default App;
+
+
+       // <History path='/history' element={></History>} />
