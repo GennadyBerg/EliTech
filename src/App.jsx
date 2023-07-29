@@ -60,7 +60,7 @@ function App() {
             :
             <Router>
                 <div className="_container">
-                    <Header />
+                    <Header cartItems={cartItems}/>
                     <Routes>
                         <Route
                             path="/"

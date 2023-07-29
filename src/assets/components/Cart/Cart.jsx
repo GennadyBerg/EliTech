@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './cart.css';
 import Map from "../Map/Map.jsx";
 import { DbContext } from '../../Contexts';
@@ -12,6 +13,7 @@ const Cart = ({ cartItems, setCartItems }) => {
     const [formErrors, setFormErrors] = useState({});
     const [isMessageInputFocused, setMessageInputFocused] = useState(false);
     const db = useContext(DbContext);
+    const navigateTo = useNavigate();
 
     const handleFocusMessageInput = () => {
         setMessageInputFocused(true);
@@ -66,8 +68,9 @@ const Cart = ({ cartItems, setCartItems }) => {
                 totalSum: calculateTotalSum(),
             }
             db.addOrder(order);
-            // Form submission logic here
-            alert('Form submitted successfully!');
+            setCartItems([]);
+            alert('Order submitted successfully!');
+            navigateTo('/');
         }
     };
 
@@ -206,7 +209,7 @@ const Cart = ({ cartItems, setCartItems }) => {
                                 <div className="orderList__submit">
                                     <div className="orderList_sum">Total sum: {calculateTotalSum()} uah.</div>
                                     <div className="orderList__button">
-                                        <button type="submit" className="button__submit">
+                                        <button disabled={!(cartItemsInCart?.length > 0)} type="submit" className="button__submit">
                                             Submit
                                         </button>
                                     </div>

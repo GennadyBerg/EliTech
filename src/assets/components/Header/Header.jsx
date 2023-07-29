@@ -1,8 +1,9 @@
 
-import {NavLink} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import './header.css'
 
-const Header = () => {
+const Header = ({ cartItems }) => {
+    let test = !(cartItems?.length > 0);
     return (
         <div className='header'>
             <div className="header__container">
@@ -12,7 +13,11 @@ const Header = () => {
                             <NavLink to='/'>Shop</NavLink>
                         </li>
                         <li className='navbar__item _border'>
-                            <NavLink to='/cart'>Shopping Cart</NavLink>
+                            {
+                                cartItems?.length > 0 ?
+                                    <NavLink to='/cart'>Shopping Cart</NavLink> :
+                                    <div>Shopping Cart</div>
+                            }
                         </li>
                         <li className='navbar__item '>
                             <NavLink to='/orders'>History</NavLink>
