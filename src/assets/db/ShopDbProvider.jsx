@@ -9,14 +9,24 @@ class ShopDbProvider extends React.Component {
   constructor(props) {
     super(props);
     this.db = new IndexedbEngine(
-      { storeDefs: 
-        [
-          {name: 'stores'}, 
-          {name: 'products', indexes: [{indexName:"idxStoreIds", propertyName: "storeId"}]},
-          {name: 'orders', indexes: [{indexName:"idxUserId", propertyName: "orderId"}]},
-        ], 
+      {
+        storeDefs:
+          [
+            { name: 'stores' },
+            { name: 'products', indexes: [{ indexName: "idxStoreIds", propertyName: "storeId" }] },
+            {
+              name: 'orders',
+              indexes:
+                [
+                  { indexName: "idxUserId", propertyName: "userId" },
+                  { indexName: "idxEmail", propertyName: "email" },
+                  { indexName: "idxPhone", propertyName: "phone" },
+                ]
+            },
+
+          ],
         dbName: 'shopDb',
-        version : 18
+        version: 19
       });
   }
 
@@ -30,15 +40,15 @@ class ShopDbProvider extends React.Component {
     await this.updateEnities(stores, 'stores');
 
     const products = [
-      { id: 1, name: 'Товар 1.1', img: product1img, storeId: 1 , price:99},
-      { id: 2, name: 'Товар 1.2', img: product2img, storeId: 1 , price:98},
-      { id: 3, name: 'Товар 1.3', img: product3img, storeId: 1 , price:97},
-      { id: 4, name: 'Товар 2.1', img: product1img, storeId: 2 , price:96},
-      { id: 5, name: 'Товар 2.2', img: product2img, storeId: 2 , price:95},
-      { id: 6, name: 'Товар 2.3', img: product3img, storeId: 2 , price:94},
-      { id: 7, name: 'Товар 3.1', img: product1img, storeId: 3 , price:93},
-      { id: 8, name: 'Товар 3.2', img: product2img, storeId: 3 , price:92},
-      { id: 9, name: 'Товар 3.3', img: product3img, storeId: 3 , price:91},
+      { id: 1, name: 'Товар 1.1', img: product1img, storeId: 1, price: 99 },
+      { id: 2, name: 'Товар 1.2', img: product2img, storeId: 1, price: 98 },
+      { id: 3, name: 'Товар 1.3', img: product3img, storeId: 1, price: 97 },
+      { id: 4, name: 'Товар 2.1', img: product1img, storeId: 2, price: 96 },
+      { id: 5, name: 'Товар 2.2', img: product2img, storeId: 2, price: 95 },
+      { id: 6, name: 'Товар 2.3', img: product3img, storeId: 2, price: 94 },
+      { id: 7, name: 'Товар 3.1', img: product1img, storeId: 3, price: 93 },
+      { id: 8, name: 'Товар 3.2', img: product2img, storeId: 3, price: 92 },
+      { id: 9, name: 'Товар 3.3', img: product3img, storeId: 3, price: 91 },
     ];
 
     await this.updateEnities(products, 'products');
@@ -88,20 +98,41 @@ class ShopDbProvider extends React.Component {
   }
 
   async getProducts(storeId) {
-    let res = await this.db.getAll('products', storeId ? {indexName: 'idxStoreIds', value: storeId} : undefined);
+    let res = await this.db.getAll('products', storeId ? { indexName: 'idxStoreIds', value: storeId } : undefined);
     return res;
   }
-  
+
   async getProductById(id) {
     let res = await this.db.getById(id, 'products');
     return res;
   }
 
-  async getOrders(userId = null) {
-    let res = await this.db.getAll('orders', userId ? {indexName: 'idxUserId', value: userId} : undefined);
+  async getOrders(userId = null, email = null, phone = null) {
+    let index = undefined;
+    let filterValues = null;
+    if (userId) {
+      index = { indexName: "idxUserId", value: userId };
+      filterValues = { email, phone };
+    }
+    else if (email) {
+      index = { indexName: "idxEmail", value: email };
+      filterValues = { userId, phone };
+    }
+    else if (phone) {
+      index = { indexName: "idxPhone", value: phone };
+      filterValues = { userId, email };
+    }
+
+    let res = await this.db.getAll('orders', index);
+    if (filterValues && res.length > 0) {
+      let filterEntries = Object.entries(filterValues);
+      filterEntries = filterEntries.filter(e => e[1]);
+      if (filterEntries.length > 0)
+        res = res.filter(r => filterEntries.every(fe => r[fe[0]] == fe[1]));
+    }
     return res;
   }
-  
+
   async getOrderById(id) {
     let res = await this.db.getById(id, 'orders');
     return res;
