@@ -92,6 +92,10 @@ const Cart = ({cartItems, setCartItems}) => {
         setPhone(phoneNumber);
     };
 
+    const handleAddressInput = (event) => {
+        setAddress(event.target.value)
+    };
+
     const handleQuantityChange = (productId, event) => {
         const value = event.target.value;
         setQuantities((prevQuantities) => ({
@@ -129,13 +133,13 @@ const Cart = ({cartItems, setCartItems}) => {
             <div className="cart__container">
                 <div className="cart__form">
                     <div className="cart__map">
-                        <Map setAddress={setAddress}/>
+                        <Map setAddress={setAddress} address={address} />
                     </div>
                     <div className="cart__inputs">
                         <div className="cart__input">
                             <label htmlFor="input1">Address:</label>
                             <input type="text" id="last-name" className="input-cart" value={address}
-                                   onChange={(e) => setAddress(e.target.value)}/>
+                                   onChange={handleAddressInput}/>
                             {formErrors.address && <p className="error">{formErrors.address}</p>}
                         </div>
                         <div className="cart__input">
