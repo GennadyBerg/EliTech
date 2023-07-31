@@ -66,10 +66,21 @@
     display: flex;
     justify-content: center;
     align-items: center;  
+    gap: 10px;
+    font-style: italic;
 
 }
+.order-wrapper button {
+    margin-top: 10px;
+    margin-left: 250px;
+    padding: 5px;
+    background-color: #f8a7a7b5;
+    border-radius: 8px;
+    text-align: center;
+    color: black;
+}
 .wrap-orderItems {
-    width: 75%;
+    width: 80%;
     /* border: 1px solid #000; */
     border-radius: 8px;
     height: 240px;
@@ -81,7 +92,8 @@
     display: inline-block;
 } */
 .card {
-    min-width: 300px;
+    min-width: 350px;
+    width: 350px;
     height: 98%;
     border: 1px solid #878686a0;
     border-radius: 8px;
@@ -102,5 +114,13 @@
 }
 .title-order {
     text-align: left;
+    
+}
+.poduct-img {
+max-width: 70%;
+height: auto;
+}
+h4 {
+    font-style: normal;
     
 }

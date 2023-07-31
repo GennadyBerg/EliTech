@@ -50,8 +50,9 @@ const OrdersList = ({ userId }) => {
                                     {
                                         order.orderedProducts.map(orderProd =>
                                             orderProd && <div className="card">
+                                                 
                                                 <img className="poduct-img" src={orderProd.img} alt="product"
-                                                    width="60%" height="100%" />
+                                                    />
                                                 <div className="prod-price">
                                                     <h5>{orderProd.name}</h5>
                                                     <h5>{orderProd.price}</h5>
