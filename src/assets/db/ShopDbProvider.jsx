@@ -4,6 +4,12 @@ import { IndexedbEngine } from "./IndexedbEngine";
 import product1img from '../img/chocolate.jpg';
 import product2img from '../img/fruit-riot.jpg';
 import product3img from '../img/roshen-cake.jpg';
+import product21img from '../img/fruit-riot.jpg';
+import product22img from '../img/hop-i-gotovo.jpg';
+import product23img from '../img/hop-i-gotovo2.jpg';
+import product31img from '../img/smk.jpg';
+import product32img from '../img/smk2.jpg';
+import product33img from '../img/smk3.jpg';
 
 class ShopDbProvider extends React.Component {
   constructor(props) {
@@ -43,12 +49,12 @@ class ShopDbProvider extends React.Component {
       { id: 1, name: 'Товар 1.1', img: product1img, storeId: 1, price: 99 },
       { id: 2, name: 'Товар 1.2', img: product2img, storeId: 1, price: 98 },
       { id: 3, name: 'Товар 1.3', img: product3img, storeId: 1, price: 97 },
-      { id: 4, name: 'Товар 2.1', img: product1img, storeId: 2, price: 96 },
-      { id: 5, name: 'Товар 2.2', img: product2img, storeId: 2, price: 95 },
-      { id: 6, name: 'Товар 2.3', img: product3img, storeId: 2, price: 94 },
-      { id: 7, name: 'Товар 3.1', img: product1img, storeId: 3, price: 93 },
-      { id: 8, name: 'Товар 3.2', img: product2img, storeId: 3, price: 92 },
-      { id: 9, name: 'Товар 3.3', img: product3img, storeId: 3, price: 91 },
+      { id: 4, name: 'Товар 2.1', img: product21img, storeId: 2, price: 96 },
+      { id: 5, name: 'Товар 2.2', img: product22img, storeId: 2, price: 95 },
+      { id: 6, name: 'Товар 2.3', img: product23img, storeId: 2, price: 94 },
+      { id: 7, name: 'Товар 3.1', img: product31img, storeId: 3, price: 93 },
+      { id: 8, name: 'Товар 3.2', img: product32img, storeId: 3, price: 92 },
+      { id: 9, name: 'Товар 3.3', img: product33img, storeId: 3, price: 91 },
     ];
 
     await this.updateEnities(products, 'products');
