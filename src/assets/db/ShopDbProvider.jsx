@@ -1,9 +1,9 @@
 ﻿import { DbContext } from "../Contexts";
 import React from 'react';
 import { IndexedbEngine } from "./IndexedbEngine";
-import product1img from '../img/chocolate-1640x790-4-1536x740.jpg';
-import product2img from '../img/fruit-riot-945x560-yellow.jpg';
-import product3img from '../img/roshen-cake-945x560-5.jpg';
+import product1img from '../img/chocolate.jpg';
+import product2img from '../img/fruit-riot.jpg';
+import product3img from '../img/roshen-cake.jpg';
 
 class ShopDbProvider extends React.Component {
   constructor(props) {
